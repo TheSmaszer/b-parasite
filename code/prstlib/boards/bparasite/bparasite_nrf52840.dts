@@ -19,6 +19,7 @@
 
 	leds {
 		compatible = "gpio-leds";
+
 		led0: led_0 {
 			// P0.28.
 			gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
@@ -27,6 +28,7 @@
 
 	buttons {
 		compatible = "gpio-keys";
+
 		button0: button_0 {
 			// P0.30.
 			gpios = <&gpio0 30 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
@@ -48,6 +50,7 @@
 
 	ctrl {
 		compatible = "gpio-keys";
+
 		fast_disch: fast_disch {
 			// P1.10.
 			gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>;
@@ -100,6 +103,12 @@
 		reg = <0x70>;
 		label = "SHTC3";
 	};
+
+	shtc4: shtc4@44 {
+		compatible = "i2c-device";
+		reg = <0x44>;
+		label = "SHTC4";
+	};
 };
 
 &pwm0 {
@@ -123,7 +132,6 @@
 		// P0.03.
 		zephyr,input-positive = <NRF_SAADC_AIN1>;
 		zephyr,resolution = <10>;
-
 	};
 
 	// Battery.
@@ -137,13 +145,11 @@
 	};
 };
 
-
 &reg1 {
 	regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
 };
 
 &flash0 {
-
 	partitions {
 		compatible = "fixed-partitions";
 		#address-cells = <1>;
@@ -151,16 +157,19 @@
 
 		boot_partition: partition@0 {
 			label = "mcuboot";
-			reg = <0x00000000 0x0000C000>;
+			reg = <0x00000000 0x0000c000>;
 		};
+
 		slot0_partition: partition@c000 {
 			label = "image-0";
-			reg = <0x0000C000 0x00067000>;
+			reg = <0x0000c000 0x00067000>;
 		};
+
 		slot1_partition: partition@73000 {
 			label = "image-1";
 			reg = <0x00073000 0x00067000>;
 		};
+
 		scratch_partition: partition@da000 {
 			label = "image-scratch";
 			reg = <0x000da000 0x0001e000>;

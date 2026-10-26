@@ -4,6 +4,7 @@ add_library(prstlib STATIC
 	src/led.c
 	src/sensors.c
 	src/shtc3.c
+	src/shtc4.c
 )
 
 target_include_directories(prstlib PUBLIC include)

@@ -5,6 +5,7 @@
 #include <prstlib/macros.h>
 #include <prstlib/sensors.h>
 #include <prstlib/shtc3.h>
+#include <prstlib/shtc4.h>
 #include <ram_pwrdn.h>
 #include <zb_nrf_platform.h>
 #include <zboss_api.h>
@@ -159,13 +160,13 @@ void update_sensors_cb(zb_uint8_t arg) {
                          &batt_percentage);
 
   // Temperature in units of 0.01 degrees Celcius.
-  zb_int16_t temperature_value = 100 * sensors.shtc3.temp_c;
+  zb_int16_t temperature_value = 100 * sensors.shtc4.temp_c;
   prst_zb_set_attr_value(ZB_ZCL_CLUSTER_ID_TEMP_MEASUREMENT,
                          ZB_ZCL_ATTR_TEMP_MEASUREMENT_VALUE_ID,
                          &temperature_value);
 
   // Relative humidity in units of 0.01%.
-  zb_int16_t rel_humi = 100 * 100 * sensors.shtc3.rel_humi;
+  zb_int16_t rel_humi = 100 * 100 * sensors.shtc4.rel_humi;
   prst_zb_set_attr_value(ZB_ZCL_CLUSTER_ID_REL_HUMIDITY_MEASUREMENT,
                          ZB_ZCL_ATTR_REL_HUMIDITY_MEASUREMENT_VALUE_ID,
                          &rel_humi);
